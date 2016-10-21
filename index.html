@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Pushbullet Messenger</title>
+
+    <style>
+      .frame {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+
+    <webview
+      id="frame"
+      class="frame"
+      src="https://www.pushbullet.com/#sms">
+    </webview>
+
+    <script>
+      let frame = document.querySelector('#frame'),
+          loginStyles = '#header, #footer, .support-fab, .inner > *:not(.header), .header .bigimage, .header-side h1 { display: none !important } .inner { background: none !important; box-shadow: none !important } .header-side { position: static !important; margin: 0 auto }',
+          messengerStyles = '#header, #mobile-header, #sink > div:nth-of-type(2) > div > div:first-of-type { display: none !important } #sink > div { top: 0 !important } #sink { position: absolute; left: -64px; right: 0; } #sink { background-color: white !important; padding-right: 20px !important } #mainbar > * { margin-right: 32px } @media (min-width: 900px) { #sink { left: -180px } } ';
+
+      frame.addEventListener('dom-ready', () => {
+        if (frame.findInPage('sign up') > 1) {
+          frame.insertCSS(loginStyles);
+        } else {
+          frame.insertCSS(messengerStyles);
+        }
+      });
+    </script>
+
+  </body>
+</html>
